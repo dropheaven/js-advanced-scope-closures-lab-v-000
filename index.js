@@ -1,19 +1,26 @@
-function produceDrivingRange(distance) {
-  return function (n1, n2) {
-    let num1 = parseInt(n1)
-    let num2 = parseInt(n2)
-    let differenceBetween = Math.abs(num1 - num2) - distance
+function produceDrivingRange(range) {
+	return function(from, to) {
+		const distance = Math.abs(parseInt(from) - parseInt(to));
 
-    if (differenceBetween < 0) {
-      return `within range by ${Math.abs(differenceBetween)}`
-    } else {
-      return `${differenceBetween} blocks out of range`
-    }
-  }
+		if (distance >= range) {
+			return `${distance - range} blocks out of range`;
+		} else {
+			return `within range by ${range - distance}`;
+		}
+	}
 }
 
 function produceTipCalculator(percent) {
-  return function (amount) {
-    return percent * amount
-  }
+	return price => percent * price;
+}
+
+function createDriver() {
+	let driverId = 0;
+
+	return class {
+		constructor(name) {
+			this.name = name;
+			this.id = ++driverId;
+		}
+	}
 }
